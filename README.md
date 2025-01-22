@@ -98,42 +98,67 @@ The system is divided into three main modules:
 ---
 
 ## Future Improvements
-1. **Expanded Arithmetic Operations**:  
-   - Incorporate additional operations such as multiplication, division, or percentage calculations, enhancing the system's versatility.  
-   - This would require an expanded FSM and additional datapath components to handle more complex operations.  
 
-2. **Preset Product Values**:  
-   - Use a multiplexer (MUX) to select from a predefined set of product prices stored in registers.  
-   - This could simplify input for common transactions and reduce the need for manual entry of values.  
+<details>
+<summary>1. Expanded Arithmetic Operations</summary>
+<p>
+  Incorporate additional operations such as multiplication, division, or percentage calculations, enhancing the system's versatility. This would require an expanded FSM and additional datapath components to handle more complex operations.
+</p>
+</details>
 
-3. **Real-Time Timestamping**:  
-   - Register the timestamp of each transaction using a library such as `time.h` in a C/VHDL environment or equivalent tools available in FPGA programming.  
-   - This would provide additional transaction data, making the system suitable for more advanced use cases like auditing or inventory tracking.  
+<details>
+<summary>2. Preset Product Values</summary>
+<p>
+  Use a multiplexer (MUX) to select from a predefined set of product prices stored in registers. This could simplify input for common transactions and reduce the need for manual entry of values.
+</p>
+</details>
 
-4. **Dynamic Input Methods**:  
-   - Replace binary switches with a keypad, allowing users to enter precise values directly.  
-   - This would make the system more user-friendly and adaptable for a broader range of applications.  
+<details>
+<summary>3. Real-Time Timestamping</summary>
+<p>
+  Register the timestamp of each transaction using a library such as `time.h` in a C/VHDL environment or equivalent tools available in FPGA programming. This would provide additional transaction data, making the system suitable for more advanced use cases like auditing or inventory tracking.
+</p>
+</details>
 
-5. **Database Integration**:  
-   - Extend the system to save transaction data into a database for persistent storage.  
-   - Example: Use SQLite for lightweight storage or connect to an external database via a serial interface.  
-   - Features could include:
-     - Maintaining a product catalog.
-     - Recording detailed transaction logs with timestamps, itemized receipts, and user details.  
+<details>
+<summary>4. Dynamic Input Methods</summary>
+<p>
+  Replace binary switches with a keypad, allowing users to enter precise values directly. This would make the system more user-friendly and adaptable for a broader range of applications.
+</p>
+</details>
 
-6. **Enhanced Display System**:  
-   - Upgrade from 7-segment displays to an LCD or OLED screen for more detailed output, such as displaying:
-     - Transaction summaries.
-     - Itemized products with their prices.
-     - Total cost and change due.  
+<details>
+<summary>5. Database Integration</summary>
+<p>
+  Extend the system to save transaction data into a database for persistent storage. Example: Use SQLite for lightweight storage or connect to an external database via a serial interface. Features could include:
+  - Maintaining a product catalog.
+  - Recording detailed transaction logs with timestamps, itemized receipts, and user details.
+</p>
+</details>
 
-7. **Scalability**:  
-   - Modularize the architecture further to support additional features like inventory management or integration with payment systems (e.g., credit card readers or QR code scanners).  
+<details>
+<summary>6. Enhanced Display System</summary>
+<p>
+  Upgrade from 7-segment displays to an LCD or OLED screen for more detailed output, such as displaying:
+  - Transaction summaries.
+  - Itemized products with their prices.
+  - Total cost and change due.
+</p>
+</details>
 
-8. **Test Automation**:  
-   - Develop automated tests to verify the correctness of FSM transitions, datapath calculations, and user inputs under various scenarios, ensuring robustness in different environments.  
+<details>
+<summary>7. Scalability</summary>
+<p>
+  Modularize the architecture further to support additional features like inventory management or integration with payment systems (e.g., credit card readers or QR code scanners).
+</p>
+</details>
 
-By implementing these improvements, the system could evolve from a basic cash register into a sophisticated point-of-sale (POS) solution, opening doors to real-world applications in retail and beyond.  
+<details>
+<summary>8. Test Automation</summary>
+<p>
+  Develop automated tests to verify the correctness of FSM transitions, datapath calculations, and user inputs under various scenarios, ensuring robustness in different environments.
+</p>
+</details>
 
 ---
 
@@ -147,4 +172,4 @@ By implementing these improvements, the system could evolve from a basic cash re
 ## References
 - Perry, D. L. (2002). *VHDL: Programming by Example*.  
 - Bhasker, J. (1999). *A VHDL Primer*.  
-- IEEE. (2008). *VHDL Language Reference Manual*.  
+- IEEE. (2008). *VHDL Language Reference Manual*.
