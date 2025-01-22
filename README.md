@@ -98,14 +98,42 @@ The system is divided into three main modules:
 ---
 
 ## Future Improvements
-1. **Expanded Arithmetic Operations**:
-   - Add support for multiplication, division, or other advanced operations.
-2. **Dynamic Input Methods**:
-   - Replace binary switches with a keypad for intuitive user interaction.
-3. **Scalability**:
-   - Further modularize the design to simplify future feature additions and maintenance.
-4. **Enhanced Display**:
-   - Upgrade to an LCD to provide richer output, such as showing both operands and the operation.
+1. **Expanded Arithmetic Operations**:  
+   - Incorporate additional operations such as multiplication, division, or percentage calculations, enhancing the system's versatility.  
+   - This would require an expanded FSM and additional datapath components to handle more complex operations.  
+
+2. **Preset Product Values**:  
+   - Use a multiplexer (MUX) to select from a predefined set of product prices stored in registers.  
+   - This could simplify input for common transactions and reduce the need for manual entry of values.  
+
+3. **Real-Time Timestamping**:  
+   - Register the timestamp of each transaction using a library such as `time.h` in a C/VHDL environment or equivalent tools available in FPGA programming.  
+   - This would provide additional transaction data, making the system suitable for more advanced use cases like auditing or inventory tracking.  
+
+4. **Dynamic Input Methods**:  
+   - Replace binary switches with a keypad, allowing users to enter precise values directly.  
+   - This would make the system more user-friendly and adaptable for a broader range of applications.  
+
+5. **Database Integration**:  
+   - Extend the system to save transaction data into a database for persistent storage.  
+   - Example: Use SQLite for lightweight storage or connect to an external database via a serial interface.  
+   - Features could include:
+     - Maintaining a product catalog.
+     - Recording detailed transaction logs with timestamps, itemized receipts, and user details.  
+
+6. **Enhanced Display System**:  
+   - Upgrade from 7-segment displays to an LCD or OLED screen for more detailed output, such as displaying:
+     - Transaction summaries.
+     - Itemized products with their prices.
+     - Total cost and change due.  
+
+7. **Scalability**:  
+   - Modularize the architecture further to support additional features like inventory management or integration with payment systems (e.g., credit card readers or QR code scanners).  
+
+8. **Test Automation**:  
+   - Develop automated tests to verify the correctness of FSM transitions, datapath calculations, and user inputs under various scenarios, ensuring robustness in different environments.  
+
+By implementing these improvements, the system could evolve from a basic cash register into a sophisticated point-of-sale (POS) solution, opening doors to real-world applications in retail and beyond.  
 
 ---
 
