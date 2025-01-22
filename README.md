@@ -2,164 +2,121 @@
 
 ## Table of Contents
 - [Overview](#overview)
-- [Project Architecture](#project-architecture)
-  - [Modules and Functionality](#modules-and-functionality)
-- [Finite State Machine (FSM)](#finite-state-machine-fsm)
-  - [State Descriptions](#state-descriptions)
-- [Technologies Used](#technologies-used)
+- [Architecture and Design](#architecture-and-design)
+- [Technologies and Tools](#technologies-and-tools)
 - [Development Process](#development-process)
-  - [Ideation and Planning](#ideation-and-planning)
-  - [Simulation and Validation](#simulation-and-validation)
-  - [Hardware Implementation](#hardware-implementation)
-- [Key Design Decisions](#key-design-decisions)
-- [Possible Improvements](#possible-improvements)
-- [Results and Reflections](#results-and-reflections)
-- [How to Run](#how-to-run)
-- [Acknowledgments](#acknowledgments)
-- [References](#references)
+- [Key Decisions and Challenges](#key-decisions-and-challenges)
+- [Future Improvements](#future-improvements)
 
 ---
 
 ## Overview
-This project implements a modular digital cash register system using finite state machines (FSM) on an FPGA. The system performs addition and subtraction operations, displays results on 7-segment displays, and records transactions in `.txt` files during functional simulations. User inputs include:  
-- **Value**: Provided via 4 binary switches.  
-- **Operator**: Selected using a separate switch.  
-- **Confirmation Buttons**: Two buttons confirm the entry of the value and the operator, respectively.  
+This project implements a digital cash register system on an FPGA using finite state machines (FSM). It performs addition and subtraction operations, displays results on 7-segment displays, and records transactions in `.txt` files during simulations.  
+
+### Key Features:
+- **User Inputs**:  
+  - 4 binary switches for numeric value.  
+  - 1 binary switch for operator selection (addition/subtraction).  
+  - 2 confirmation buttons: one for the value and one for the operator.  
+- **Outputs**:  
+  - 7-segment displays to show the computed results.  
+- **Simulation and Deployment**:  
+  - Simulations validated via ModelSim.  
+  - Implemented on a DE10-Lite FPGA board.  
 
 ---
 
-## Project Architecture
+## Architecture and Design
+The system is divided into three main modules:  
 
-### Modules and Functionality
-1. **Control Module**:
-   - Implements FSM to coordinate system states and operations.
-2. **Datapath Module**:
-   - Converts binary input from switches into decimal values.
-   - Executes arithmetic operations based on the selected operator.
-3. **Display Module**:
-   - Outputs the computed result on 7-segment displays.
+### 1. **Control Module (FSM)**:
+- Coordinates the system’s operation across four states:
+  1. **Read Value**: Captures input from the switches upon pressing the value confirmation button.
+  2. **Read Operator**: Captures the selected operation upon pressing the operator confirmation button.
+  3. **Compute**: Executes the operation (addition/subtraction).
+  4. **Display**: Outputs the result to the 7-segment displays.  
 
-### Input Handling
-- **4 Switches**: Represent a binary number for the value input.
-- **1 Switch**: Used to select the operation (addition or subtraction).
-- **2 Buttons**:
-  - **Value Confirmation Button**: Confirms the entry of the numeric value.
-  - **Operator Confirmation Button**: Confirms the operator selection.
+- **Design Choice**:  
+  A simple FSM with four states ensures clear transitions, ease of debugging, and efficient operation.
 
----
+### 2. **Datapath Module**:
+- **Functions**:
+  - Converts binary input from switches into decimal format.
+  - Executes arithmetic operations.
+  - Prepares the result for display.  
+- **Components**:
+  - **Registers**: Temporarily store user inputs and selected operations.
+  - **Arithmetic Unit**: Performs addition and subtraction.
+  - **BCD to 7-Segment Converter**: Formats the computed result for output.
 
-## Finite State Machine (FSM)
-
-### State Descriptions
-The FSM operates in five states, coordinating the flow of inputs, operations, and outputs:
-
-1. **Idle State**:
-   - **Function**: Waits for the value confirmation button to be pressed.
-   - **Transition Condition**: Advances to the **Read Value** state when the button is pressed.
-
-2. **Read Value State**:
-   - **Function**: Reads the binary value from the switches and stores it in a register.
-   - **Transition Condition**: Moves to the **Read Operator** state when the operator confirmation button is pressed.
-
-3. **Read Operator State**:
-   - **Function**: Reads the operator (addition/subtraction) from the switch and stores it.
-   - **Transition Condition**: Advances to the **Compute** state after confirming the operator.
-
-4. **Compute State**:
-   - **Function**: Performs the selected arithmetic operation using the inputs.
-   - **Transition Condition**: Proceeds to the **Display** state once computation is complete.
-
-5. **Display State**:
-   - **Function**: Converts and displays the result on 7-segment displays.
-   - **Transition Condition**: Returns to the **Idle** state after a set time or upon pressing reset.
+### 3. **Display Module**:
+- Outputs the computed results on two 7-segment displays representing the units and tens digits.
 
 ---
 
-## Technologies Used
-1. **VHDL**:
-   - Used to design FSMs and hardware components.
-2. **ModelSim**:
-   - Simulates the FSM and validates functionality using waveform analysis.
-3. **FPGA Kit**:
-   - **Board**: DE10-Lite.
-   - **Pin Configuration**:
-     - Inputs: 4 switches for the numeric value, 1 switch for the operator, 2 buttons for confirmation.
-     - Outputs: 7-segment displays and status LEDs.
-   - **Debounce-Free Input**: Configured with Schmitt Trigger for clean button presses.
+## Technologies and Tools
+1. **VHDL**:  
+   - Used to design the FSM, datapath, and display logic.  
+2. **ModelSim**:  
+   - Simulates and validates FSM transitions and system functionality.  
+3. **DE10-Lite FPGA Board**:  
+   - **Inputs**: 4 binary switches for numeric values, 1 binary switch for the operator, and 2 buttons for confirmation.  
+   - **Outputs**: 7-segment displays for results.  
+   - Configured with Schmitt Trigger to ensure clean and debounce-free button inputs.
 
 ---
 
 ## Development Process
+1. **Planning and Ideation**:
+   - **Objective**: Build a reliable, modular system within the project timeline.  
+   - Focused on simplifying FSM states and ensuring modularity for easier debugging.  
 
-### Ideation and Planning
-- **Goals**: Create a functional and modular system to perform simple arithmetic operations.
-- **Time Management**: Divided the timeline into design, simulation, integration, and testing phases, with weekly milestones.
+2. **Simulation and Validation**:
+   - Conducted thorough simulations in ModelSim to verify FSM state transitions and arithmetic logic.  
+   - Recorded transactions in `.txt` files for simulation analysis.  
 
-### Simulation and Validation
-- **ModelSim Simulations**:
-  - Verified state transitions and operations using waveform outputs.
-  - Tested with various input combinations to ensure reliability.
-- **Debugging**:
-  - Addressed issues such as incorrect state transitions during simulation before moving to hardware implementation.
-
-### Hardware Implementation
-- **Input and Output Configuration**:
-  - Binary switches for numeric value and operator selection.
-  - Buttons for confirming value and operator inputs.
-- **System Testing**:
-  - Successfully implemented on the DE10-Lite board with outputs displayed on 7-segment displays.
+3. **Hardware Implementation**:
+   - Deployed the system on the DE10-Lite FPGA board.  
+   - Configured switches and buttons for user input and tested real-time functionality on the 7-segment displays.
 
 ---
 
-## Key Design Decisions
-1. **Modular Architecture**:
-   - Separate modules for control, data processing, and display enhanced maintainability.
-2. **Simplified FSM**:
-   - Five states ensured clear logic and manageable transitions.
-3. **Simulation-First Approach**:
-   - Thorough validation in ModelSim minimized errors during hardware testing.
+## Key Decisions and Challenges
+### Design Simplicity:
+- **FSM with Four States**:  
+  A simplified FSM ensures clarity, efficient debugging, and faster implementation. It focuses on core functionalities: capturing inputs, executing operations, and displaying results.  
+
+### Input Design:
+- **Switches for Value and Operator**:  
+  Switches were chosen for their simplicity and reliability in providing binary inputs.  
+- **Two Confirmation Buttons**:  
+  Separate buttons for value and operator inputs ensure clear and deliberate state transitions, reducing the risk of errors.  
+
+### Time Constraints:
+- Prioritized delivering a functional system with essential features rather than overcomplicating the design with additional operations or states.  
 
 ---
 
-## Possible Improvements
-1. **Expanded Operations**:
-   - Include additional arithmetic operations like multiplication and division.
-2. **Dynamic Input Interface**:
-   - Replace binary switches with a keypad for more intuitive data entry.
-3. **Enhanced Feedback**:
-   - Use an LCD for richer output, such as displaying operation details.
-4. **Scalability**:
-   - Modularize further to simplify future feature additions.
-
----
-
-## Results and Reflections
-- **Simulation Outcomes**:
-  - Validated FSM states and arithmetic accuracy through waveform analysis.
-  - Recorded transactions successfully in `.txt` files.
-- **Hardware Validation**:
-  - Reliable performance with real-time operation on DE10-Lite.
-  - Clear outputs on 7-segment displays.
-
----
-
-## How to Run
-1. **Simulations**:
-   - Open VHDL files in ModelSim and simulate with different inputs to observe waveforms.
-2. **Hardware Setup**:
-   - Deploy the design onto the DE10-Lite FPGA board.
-   - Connect switches, buttons, and 7-segment displays.
+## Future Improvements
+1. **Expanded Arithmetic Operations**:
+   - Add support for multiplication, division, or other advanced operations.
+2. **Dynamic Input Methods**:
+   - Replace binary switches with a keypad for intuitive user interaction.
+3. **Scalability**:
+   - Further modularize the design to simplify future feature additions and maintenance.
+4. **Enhanced Display**:
+   - Upgrade to an LCD to provide richer output, such as showing both operands and the operation.
 
 ---
 
 ## Acknowledgments
-- **Team Members**: Amanda Fernandes Alves, Thiago Gomes Rezende.
-- **Professor**: Jhonattan Córdoba Ramírez.
-- **Institution**: Universidade Federal de Minas Gerais.
+- **Team Members**: Amanda Fernandes Alves, Thiago Gomes Rezende.  
+- **Professor**: Jhonattan Córdoba Ramírez.  
+- **Institution**: Universidade Federal de Minas Gerais.  
 
 ---
 
 ## References
-- Perry, D. L. (2002). *VHDL: Programming by Example*.
-- Bhasker, J. (1999). *A VHDL Primer*.
-- IEEE. (2008). *VHDL Language Reference Manual*.
+- Perry, D. L. (2002). *VHDL: Programming by Example*.  
+- Bhasker, J. (1999). *A VHDL Primer*.  
+- IEEE. (2008). *VHDL Language Reference Manual*.  
