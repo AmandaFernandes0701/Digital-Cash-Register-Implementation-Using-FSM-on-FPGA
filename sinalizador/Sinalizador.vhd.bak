@@ -1,0 +1,105 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+entity Sinalizador is
+    port (
+        Clock         : in std_logic;
+        Reset         : in std_logic;
+        E             : in std_logic_vector(15 downto 0);  -- DATA_WIDTH = 16 para o sinal 'E'
+
+        -- Sinais de saída
+        Sobe          : out std_logic;  
+        Desce         : out std_logic;
+        Display_7seg  : out std_logic_vector(6 downto 0)
+    );
+end Sinalizador;
+
+architecture Structural of Sinalizador is
+
+    -- Sinais internos para a interligação dos componentes
+    signal Pino_Load_E      : std_logic;
+    signal Pino_Reset_MA    : std_logic;
+    signal Pino_Maior       : std_logic;
+    signal Pino_Menor       : std_logic;
+    signal Pino_Descendo    : std_logic;
+    signal Pino_Subindo     : std_logic;
+    signal Pino_Atualizar   : std_logic;
+    signal Sobe_Sinalizador : std_logic;
+    signal Desce_Sinalizador: std_logic;
+    signal Media_Sinalizador: std_logic_vector(6 downto 0);
+
+    -- Instanciando os componentes Datapath e Controladora
+    component Datapath is
+        generic (
+            DATA_WIDTH : natural := 16
+        );
+        port (
+            E            : in std_logic_vector(DATA_WIDTH - 1 downto 0);
+            Pino_Load_E  : in std_logic;
+            Pino_Reset_MA : in std_logic;
+            Pino_Maior   : out std_logic;
+            Pino_Menor   : out std_logic;
+            Pino_Descendo : in std_logic;
+            Pino_Subindo  : in std_logic;
+            Pino_Atualizar: in std_logic;
+            Sobe          : out std_logic;
+            Desce         : out std_logic;
+            Media         : out std_logic_vector(6 downto 0);
+            Clock         : in std_logic
+        );
+    end component;
+
+    component Controladora is
+        port (
+            Clock     : in std_logic;
+            Reset     : in std_logic;
+            Maior     : in std_logic;
+            Menor     : in std_logic;
+            Load_E    : out std_logic;
+            Reset_MA  : out std_logic;
+            Descendo  : out std_logic;
+            Subindo   : out std_logic;
+            Atualize  : out std_logic
+        );
+    end component;
+
+begin
+
+    -- Instanciando a Controladora
+    Controladora_Inst : Controladora
+    port map (
+        Clock     => Clock,
+        Reset     => Reset,
+        Maior     => Pino_Maior,
+        Menor     => Pino_Menor,
+        Load_E    => Pino_Load_E,
+        Reset_MA  => Pino_Reset_MA,
+        Descendo  => Pino_Descendo,
+        Subindo   => Pino_Subindo,
+        Atualize  => Pino_Atualizar
+    );
+
+    -- Instanciando o Datapath
+    Datapath_Inst : Datapath
+    port map (
+        E            => E,
+        Pino_Load_E  => Pino_Load_E,
+        Pino_Reset_MA => Pino_Reset_MA,
+        Pino_Maior   => Pino_Maior,
+        Pino_Menor   => Pino_Menor,
+        Pino_Descendo => Pino_Descendo,
+        Pino_Subindo  => Pino_Subindo,
+        Pino_Atualizar => Pino_Atualizar,
+        Sobe          => Sobe_Sinalizador,
+        Desce         => Desce_Sinalizador,
+        Media         => Media_Sinalizador,
+        Clock         => Clock
+    );
+
+    -- Atribuindo as saídas do Sinalizador
+    Sobe <= Sobe_Sinalizador;
+    Desce <= Desce_Sinalizador;
+    Display_7seg <= Media_Sinalizador;  -- Saída para o Display 7 segmentos
+
+end Structural;
