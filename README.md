@@ -149,14 +149,7 @@ The system is divided into three main modules:
 </details>
 
 <details>
-<summary>7. Scalability</summary>
-<p>
-  Modularize the architecture further to support additional features like inventory management or integration with payment systems (e.g., credit card readers or QR code scanners).
-</p>
-</details>
-
-<details>
-<summary>8. Test Automation</summary>
+<summary>7. Test Automation</summary>
 <p>
   Develop automated tests to verify the correctness of FSM transitions, datapath calculations, and user inputs under various scenarios, ensuring robustness in different environments.
 </p>
