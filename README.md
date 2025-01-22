@@ -12,6 +12,7 @@
 
 ## Overview
 This project implements a digital cash register system on an FPGA using finite state machines (FSM). It performs addition and subtraction operations, displays results on 7-segment displays, and records transactions in `.txt` files during simulations.  
+For more detailed information, I have also provided a PDF report that explains the project in greater depth. You can find the report in the root directory of the project.
 
 ### Key Features:
 - **User Inputs**:  
@@ -34,7 +35,7 @@ The system is divided into three main modules:
   1. **Read Value**: Captures input from the switches upon pressing the value confirmation button.
   2. **Read Operator**: Captures the selected operation upon pressing the operator confirmation button.
   3. **Compute**: Executes the operation (addition/subtraction).
-  4. **Display**: Outputs the result to the 7-segment displays.  
+  4. **Display**: Outputs the result to the 7-segment displays.
 
 - **Design Choice**:  
   A simple FSM with four states ensures clear transitions, ease of debugging, and efficient operation.
