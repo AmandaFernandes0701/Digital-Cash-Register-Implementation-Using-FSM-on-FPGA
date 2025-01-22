@@ -1,0 +1,47 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity calculo is
+    generic (
+        W : integer := 32 -- Largura padrão do vetor
+    );
+    port (
+        CLK       : in  std_logic;                       -- Sinal de relógio
+        RESET     : in  std_logic;                       -- Sinal de reset
+        INPUT     : in  std_logic_vector(W-1 downto 0);  -- Entrada
+        OPERATION : in  std_logic;                       -- '0' para soma, '1' para subtração
+        OUTPUT    : out std_logic_vector(W-1 downto 0)   -- Saída do resultado
+    );
+end calculo;
+
+architecture arch of calculo is
+begin
+    process(CLK, RESET) is
+        variable prev_value : unsigned(W-1 downto 0); -- Valor armazenado do ciclo anterior
+        variable curr_value : unsigned(W-1 downto 0); -- Valor atual convertido
+        variable result     : unsigned(W-1 downto 0); -- Resultado da operação
+    begin
+        if RESET = '1' then
+            -- Inicializa as variáveis no reset
+            prev_value := (others => '0');
+            result     := (others => '0');
+        elsif rising_edge(CLK) then
+            -- Converte o INPUT para o tipo unsigned
+            curr_value := unsigned(INPUT);
+
+            -- Escolhe a operação com base em OPERATION
+            if OPERATION = '0' then
+                result := prev_value + curr_value; -- Soma
+            else
+                result := prev_value - curr_value; -- Subtração
+            end if;
+
+            -- Atualiza o valor anterior com o valor atual
+            prev_value := curr_value;
+        end if;
+
+        -- Converte o resultado para std_logic_vector e envia para OUTPUT
+        OUTPUT <= std_logic_vector(result);
+    end process;
+end arch;
