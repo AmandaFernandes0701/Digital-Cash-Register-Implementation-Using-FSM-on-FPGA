@@ -1,0 +1,152 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+-- Definição da controladora
+entity controladora is
+    port (
+        CLK            : in std_logic;              -- Relógio
+        RESET          : in std_logic;              -- Reset
+        INPUT          : in std_logic_vector(3 downto 0);  -- Entrada do valor
+        OPERATION      : in std_logic;              -- '0' para soma, '1' para subtração
+        BUTTON_PRESSED : in std_logic;             -- Indetifica se o usuário confirmou o valor ou operação (pressionou o botão)
+        ENABLE_REG     : out std_logic;             -- Habilita o registrador
+        ENABLE_CALC    : out std_logic;             -- Habilita o módulo de cálculo
+        ENABLE_DISPLAY : out std_logic;             -- Habilita o display
+        Q_REG          : in std_logic_vector(3 downto 0); -- Saída do registrador
+        OUTPUT         : out std_logic_vector(3 downto 0)  -- Resultado da operação
+    );
+end controladora;
+
+architecture fsm of controladora is
+
+    -- Definindo os estados
+    type state_type is (S0, S1, S2, S3);
+    signal state, next_state : state_type;
+
+    -- Sinais para interconexão
+    signal datapath_result : std_logic_vector(3 downto 0);
+    signal operacao_subtracao : std_logic;
+
+    COMPONENT datapath
+        GENERIC (
+            W : INTEGER := 4
+        );
+        PORT (
+            clk                : IN  std_logic;
+            reset              : IN  std_logic;
+            BUTTON_PRESSED     : IN  std_logic;
+            valor_inserido     : IN  std_logic_vector(3 downto 0);
+            operacao_adicao    : IN  std_logic;
+            operacao_subtracao : IN  std_logic;
+            display_unidades   : OUT std_logic_vector(6 downto 0);
+            display_dezenas    : OUT std_logic_vector(6 downto 0);
+            resultado          : OUT std_logic_vector(3 downto 0)
+        );
+    END COMPONENT;
+
+begin
+
+    -- Instância do Datapath
+    datapath_inst: datapath
+        GENERIC MAP (W => 4)
+        PORT MAP (
+            clk => CLK,
+            reset => RESET,
+            BUTTON_PRESSED => BUTTON_PRESSED,
+            valor_inserido => INPUT,
+            operacao_adicao => OPERATION,
+            operacao_subtracao => operacao_subtracao,  -- Agora é uma variável intermediária
+            display_unidades => open, -- Não utilizado na controladora
+            display_dezenas => open,  -- Não utilizado na controladora
+            resultado => datapath_result -- Conectando à variável interna
+        );
+
+    -- Conectando a saída do Datapath à saída da Controladora
+    OUTPUT <= datapath_result;
+
+    -- Processo da máquina de estados
+    process(CLK, RESET)
+    begin
+        if RESET = '1' then
+            state <= S0;
+        elsif rising_edge(CLK) then
+            state <= next_state;  -- Atribui o próximo estado
+        end if;
+    end process;
+    
+    -- Definição da próxima transição de estado
+    process (state, BUTTON_PRESSED)
+    begin
+        -- Por padrão, a próxima transição é manter o estado atual
+        next_state <= state;
+
+        case state is
+            when S0 =>
+                if BUTTON_PRESSED = '1' then
+                    next_state <= S1;
+                end if;
+
+            when S1 =>
+                if BUTTON_PRESSED = '1' then
+                    next_state <= S2;
+                end if;
+
+            when S2 =>
+                next_state <= S3;
+
+            when S3 =>
+                next_state <= S0;  
+
+            when others =>
+                next_state <= S0;  -- Caso de fallback
+        end case;
+    end process;
+
+    -- Lógica de controle das saídas
+    process(state, INPUT, OPERATION, Q_REG)
+    begin
+        -- Valores padrão de saída
+        ENABLE_REG <= '0';
+        ENABLE_CALC <= '0';
+        ENABLE_DISPLAY <= '0';
+
+        case state is
+            when S0 =>  -- Insere o valor
+                ENABLE_REG <= '1'; 
+                ENABLE_CALC <= '0'; 
+                ENABLE_DISPLAY <= '0';
+
+            when S1 =>  -- Insere a operação (soma ou subtração)
+                ENABLE_REG <= '1';
+                ENABLE_CALC <= '1';
+                ENABLE_DISPLAY <= '0'; 
+
+            when S2 =>  -- Realiza a operação (calcular soma ou subtração)
+                ENABLE_REG <= '0';
+                ENABLE_CALC <= '1';
+                ENABLE_DISPLAY <= '0'; 
+
+            when S3 =>  -- Mostra o resultado no display
+                ENABLE_REG <= '0';
+                ENABLE_CALC <= '0'; 
+                ENABLE_DISPLAY <= '1';
+                
+            when others =>
+                ENABLE_REG <= '0';
+                ENABLE_CALC <= '0';
+                ENABLE_DISPLAY <= '0';
+        end case;
+    end process;
+
+    -- Definir o valor de operacao_subtracao conforme o estado e operação
+    process(OPERATION)
+    begin
+        if OPERATION = '1' then
+            operacao_subtracao <= '1';  -- Subtração
+        else
+            operacao_subtracao <= '0';  -- Soma
+        end if;
+    end process;
+
+end fsm;

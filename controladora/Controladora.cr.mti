@@ -1,0 +1,11 @@
+C:/Users/Aluno/Projetos/Tudo/Controladora/Controladora.vhd {0 {vcom -work work -2002 -explicit -stats=none C:/Users/Aluno/Projetos/Tudo/Controladora/Controladora.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+** Error (suppressible): (vcom-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {} {}} C:/Users/Aluno/Projetos/Tudo/Controladora/tb_Controladora.vhd {0 {vcom -work work -2002 -explicit -stats=none C:/Users/Aluno/Projetos/Tudo/Controladora/tb_Controladora.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+** Error (suppressible): (vcom-19) Failed to access library 'work' at "work".
+No such file or directory. (errno = ENOENT)
+
+} {} {}}

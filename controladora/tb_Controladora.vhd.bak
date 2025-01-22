@@ -1,0 +1,90 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+-- Definição do testbench
+entity tb_pseudo_mux is
+end tb_pseudo_mux;
+
+architecture behavior of tb_pseudo_mux is
+
+    -- Componentes do DUT (Device Under Test)
+    component pseudo_mux
+        port (
+            CLOCK   : in    std_logic;
+            S       : in    std_logic;
+            RESET   : in    std_logic;
+            A, B, C, D : in std_logic;
+            Q       : out   std_logic
+        );
+    end component;
+
+    -- Sinais do testbench
+    signal CLOCK   : std_logic := '0';
+    signal S       : std_logic := '0';
+    signal RESET   : std_logic := '0';
+    signal A, B, C, D : std_logic := '0';
+    signal Q       : std_logic;
+
+begin
+
+    -- Instância do DUT (pseudo_mux)
+    uut: pseudo_mux
+        port map (
+            CLOCK   => CLOCK,
+            S       => S,
+            RESET   => RESET,
+            A       => A,
+            B       => B,
+            C       => C,
+            D       => D,
+            Q       => Q
+        );
+
+    -- Geração do clock
+    clock_process : process
+    begin
+        CLOCK <= '0';
+        wait for 10 ns;
+        CLOCK <= '1';
+        wait for 10 ns;
+    end process clock_process;
+
+    -- Sequência de estímulos (input)
+    stimulus_process : process
+    begin
+        -- Inicialização
+        RESET <= '1';
+        A <= '0'; B <= '1'; C <= '0'; D <= '1';
+        wait for 20 ns;  -- Tempo para o reset
+        
+        RESET <= '0';  -- Desativa o reset
+
+        -- Teste 1: A → B → C → D → A (ciclo de mudanças)
+        wait for 20 ns;
+        S <= '1'; -- Altera para B
+        wait for 20 ns;
+        S <= '0'; -- Volta para A
+        wait for 20 ns;
+        S <= '1'; -- Altera para B
+        wait for 20 ns;
+        S <= '0'; -- Volta para A
+        wait for 20 ns;
+
+        -- Teste 2: Comportamento com mudanças de dados
+        A <= '1'; B <= '0'; C <= '1'; D <= '0';
+        wait for 20 ns;
+        S <= '1'; -- Altera para B
+        wait for 20 ns;
+        S <= '1'; -- Altera para C
+        wait for 20 ns;
+        S <= '1'; -- Altera para D
+        wait for 20 ns;
+        S <= '1'; -- Volta para A
+        wait for 20 ns;
+
+        -- Finaliza a simulação
+        wait;
+    end process stimulus_process;
+
+end behavior;
