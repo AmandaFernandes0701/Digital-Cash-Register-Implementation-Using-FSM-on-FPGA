@@ -1,0 +1,25 @@
+|display
+entrada[0] => Mod0.IN7
+entrada[0] => Div0.IN7
+entrada[1] => Mod0.IN6
+entrada[1] => Div0.IN6
+entrada[2] => Mod0.IN5
+entrada[2] => Div0.IN5
+entrada[3] => Mod0.IN4
+entrada[3] => Div0.IN4
+saida_unidades[0] << Mux6.DB_MAX_OUTPUT_PORT_TYPE
+saida_unidades[1] << Mux5.DB_MAX_OUTPUT_PORT_TYPE
+saida_unidades[2] << Mux4.DB_MAX_OUTPUT_PORT_TYPE
+saida_unidades[3] << Mux3.DB_MAX_OUTPUT_PORT_TYPE
+saida_unidades[4] << Mux2.DB_MAX_OUTPUT_PORT_TYPE
+saida_unidades[5] << Mux1.DB_MAX_OUTPUT_PORT_TYPE
+saida_unidades[6] << Mux0.DB_MAX_OUTPUT_PORT_TYPE
+saida_dezenas[0] << Mux13.DB_MAX_OUTPUT_PORT_TYPE
+saida_dezenas[1] << Mux12.DB_MAX_OUTPUT_PORT_TYPE
+saida_dezenas[2] << Mux11.DB_MAX_OUTPUT_PORT_TYPE
+saida_dezenas[3] << Mux10.DB_MAX_OUTPUT_PORT_TYPE
+saida_dezenas[4] << Mux9.DB_MAX_OUTPUT_PORT_TYPE
+saida_dezenas[5] << Mux8.DB_MAX_OUTPUT_PORT_TYPE
+saida_dezenas[6] << Mux7.DB_MAX_OUTPUT_PORT_TYPE
+
+
