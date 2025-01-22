@@ -1,0 +1,77 @@
+Info: Start Nativelink Simulation process
+
+========= EDA Simulation Settings =====================
+
+Sim Mode              :  Gate
+Family                :  max10
+Quartus root          :  c:/intelfpga_lite/20.1/quartus/bin64/
+Quartus sim root      :  c:/intelfpga_lite/20.1/quartus/eda/sim_lib
+Simulation Tool       :  modelsim-altera
+Simulation Language   :  vhdl
+Version               :  93
+Simulation Mode       :  GUI
+Sim Output File       :  Datapath.vho
+Sim SDF file          :  Datapath__vhdl.sdo
+Sim dir               :  simulation\modelsim
+
+=======================================================
+
+Info: Starting NativeLink simulation with ModelSim-Altera software
+Sourced NativeLink script c:/intelfpga_lite/20.1/quartus/common/tcl/internal/nativelink/modelsim.tcl
+Warning: File Datapath_run_msim_gate_vhdl.do already exists - backing up current file as Datapath_run_msim_gate_vhdl.do.bak7
+Probing transcript
+ModelSim-Altera Info: # Reading pref.tcl
+ModelSim-Altera Info: # do Datapath_run_msim_gate_vhdl.do
+ModelSim-Altera Info: # if {[file exists gate_work]} {
+ModelSim-Altera Info: # 	vdel -lib gate_work -all
+ModelSim-Altera Info: # }
+ModelSim-Altera Info: # ** Error (suppressible): (vdel-19) Failed to access library 'gate_work' at "gate_work".
+ModelSim-Altera Info: # No such file or directory. (errno = ENOENT)
+ModelSim-Altera Warning: # ** Warning: (vdel-57) Library 'gate_work' is missing or is not a valid ModelSim library.
+ModelSim-Altera Error: # ** Error: C:/intelFPGA_lite/20.1/modelsim_ase/win32aloem/vdel failed.
+ModelSim-Altera Info: # Error in macro ./Datapath_run_msim_gate_vhdl.do line 4
+ModelSim-Altera Info: # C:/intelFPGA_lite/20.1/modelsim_ase/win32aloem/vdel failed.
+ModelSim-Altera Info: #     while executing
+ModelSim-Altera Info: # "error [FixExecError $msg]"
+ModelSim-Altera Info: #     (procedure "vdel" line 6)
+ModelSim-Altera Info: #     invoked from within
+ModelSim-Altera Info: # "vdel -lib gate_work -all"
+ModelSim-Altera Info: #     invoked from within
+ModelSim-Altera Info: # "if {[file exists gate_work]} {
+ModelSim-Altera Info: # 	vdel -lib gate_work -all
+ModelSim-Altera Info: # }"
+Error: Errors encountered while running modelsim do file
+Error: NativeLink simulation flow was NOT successful
+
+
+
+================The following additional information is provided to help identify the cause of error while running nativelink scripts=================
+Nativelink TCL script failed with errorCode:  1
+Nativelink TCL script failed with errorInfo:  1
+    (procedure "launch_sim" line 1)
+    invoked from within
+"launch_sim launch_args_hash"
+    ("eval" body line 1)
+    invoked from within
+"eval launch_sim launch_args_hash"
+    invoked from within
+"if [ info exists ::errorCode ] {
+                set savedCode $::errorCode
+                set savedInfo $::errorInfo
+                error $result $..."
+    invoked from within
+"if [catch {eval launch_sim launch_args_hash} result ] {
+            set status 1
+            if [ info exists ::errorCode ] {
+                set save..."
+    (procedure "run_sim" line 74)
+    invoked from within
+"run_sim run_sim_args_hash"
+    invoked from within
+"if [ info exists ::errorCode ] {
+            set savedCode $::errorCode
+            set savedInfo $::errorInfo
+            error "$result" $savedInfo ..."
+    (procedure "run_eda_simulation_tool" line 334)
+    invoked from within
+"run_eda_simulation_tool eda_opts_hash"

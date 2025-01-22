@@ -1,0 +1,99 @@
+# Compile of Datapath.vhd was successful.
+# Compile of tb_Datapath.vhd was successful.
+# Compile of Reg1.vhd was successful.
+# Compile of RegW.vhd was successful.
+# Compile of display.vhd was successful.
+# Compile of calculo.vhd was successful.
+# 6 compiles, 0 failed with no errors.
+vsim -gui work.tb_datapath
+# vsim -gui work.tb_datapath 
+# Start time: 13:21:00 on Jan 06,2025
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.tb_datapath(teste)
+# Loading work.datapath(rtl)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.regw(comportamental)
+# Loading work.reg1(comportamental)
+# ** Fatal: (vsim-3807) Types do not match between component and entity for port "D".
+#    Time: 0 ps  Iteration: 0  Instance: /tb_datapath/instancia_Datapath/Reg_C File: C:/Users/Aluno/Projetos/Projeto1_Amanda_Thiago/Reg1/Reg1.vhd Line: 11
+# FATAL ERROR while loading design
+# Error loading design
+# End time: 13:21:00 on Jan 06,2025, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 9
+# Compile of Datapath.vhd was successful.
+# Compile of tb_Datapath.vhd was successful.
+# Compile of Reg1.vhd was successful.
+# Compile of RegW.vhd was successful.
+# Compile of display.vhd was successful.
+# Compile of calculo.vhd was successful.
+# 6 compiles, 0 failed with no errors.
+vsim -gui work.tb_datapath
+# vsim -gui work.tb_datapath 
+# Start time: 13:29:33 on Jan 06,2025
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.tb_datapath(teste)
+# Loading work.datapath(rtl)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.regw(comportamental)
+# Loading work.reg1(comportamental)
+# Loading ieee.numeric_std(body)
+# Loading work.calculo(arch)
+# Loading work.display(with_select_display)
+add wave -position insertpoint sim:/tb_datapath/*
+run 500 ns
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_datapath/instancia_Datapath/BCD
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_datapath/instancia_Datapath/BCD
+add wave -position insertpoint sim:/tb_datapath/instancia_Datapath/*
+restart -f
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+run 500 ns
+# GetModuleFileName: Não foi possível encontrar o módulo especificado.
+# 
+# 
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_datapath/instancia_Datapath/BCD
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_datapath/instancia_Datapath/BCD
+# Compile of Datapath.vhd was successful.
+# Compile of tb_Datapath.vhd was successful.
+# Compile of Reg1.vhd was successful.
+# Compile of RegW.vhd was successful.
+# Compile of display.vhd was successful.
+# Compile of calculo.vhd was successful.
+# 6 compiles, 0 failed with no errors.
+quit -sim
+# End time: 13:43:03 on Jan 06,2025, Elapsed time: 0:13:30
+# Errors: 0, Warnings: 4
+vsim -gui work.tb_datapath
+# vsim -gui work.tb_datapath 
+# Start time: 13:43:27 on Jan 06,2025
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.tb_datapath(teste)
+# Loading work.datapath(rtl)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.regw(comportamental)
+# Loading work.reg1(comportamental)
+# Loading ieee.numeric_std(body)
+# Loading work.calculo(arch)
+# Loading work.display(with_select_display)
+add wave -position insertpoint sim:/tb_datapath/*
+run -all
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_datapath/instancia_Datapath/BCD
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_datapath/instancia_Datapath/BCD
+# Break key hit
+# Break in Process line__20 at C:/Users/Aluno/Projetos/Projeto1_Amanda_Thiago/calculo/calculo.vhd line 20
+# End time: 14:26:22 on Jan 06,2025, Elapsed time: 0:42:55
+# Errors: 0, Warnings: 4

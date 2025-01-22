@@ -1,0 +1,55 @@
+C:/Users/Aluno/Projetos/Projeto1_Amanda_Thiago/RegW/RegW.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Aluno/Projetos/Projeto1_Amanda_Thiago/RegW/RegW.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity RegW
+-- Compiling architecture comportamental of RegW
+
+} {} {}} C:/Users/Aluno/Projetos/Projeto1_Amanda_Thiago/calculo/calculo.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Aluno/Projetos/Projeto1_Amanda_Thiago/calculo/calculo.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity calculo
+-- Compiling architecture arch of calculo
+
+} {} {}} C:/Users/Aluno/Projetos/Projeto1_Amanda_Thiago/Datapath/Datapath.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Aluno/Projetos/Projeto1_Amanda_Thiago/Datapath/Datapath.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity datapath
+-- Compiling architecture rtl of datapath
+
+} {} {}} C:/Users/Aluno/Projetos/Projeto1_Amanda_Thiago/Reg1/Reg1.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Aluno/Projetos/Projeto1_Amanda_Thiago/Reg1/Reg1.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity Reg1
+-- Compiling architecture comportamental of Reg1
+
+} {} {}} C:/Users/Aluno/Projetos/Projeto1_Amanda_Thiago/Datapath/tb_Datapath.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Aluno/Projetos/Projeto1_Amanda_Thiago/Datapath/tb_Datapath.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity tb_Datapath
+-- Compiling architecture teste of tb_Datapath
+
+} {} {}} C:/Users/Aluno/Projetos/Projeto1_Amanda_Thiago/display/display.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Aluno/Projetos/Projeto1_Amanda_Thiago/display/display.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity display
+-- Compiling architecture with_select_display of display
+
+} {} {}}

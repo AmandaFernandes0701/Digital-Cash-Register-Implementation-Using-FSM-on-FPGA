@@ -1,0 +1,14 @@
+LIBRARY IEEE;
+use ieee.std_logic_1164.all;
+
+Entity Datapath is 
+	port (
+		Load_E: in std_logic;
+		Reset_MA: in std_logic;
+		Descendo: in std_logic;
+		Subindo: in std_logic;
+		Atualize: in std_logic;
+		
+		Maior: out std_logic;
+		Menor: out std_logic;
+	)
