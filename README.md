@@ -7,6 +7,8 @@
 - [Development Process](#development-process)
 - [Key Decisions and Challenges](#key-decisions-and-challenges)
 - [Future Improvements](#future-improvements)
+- [Acknowledgments](#acknowledgments)
+- [References](#references)
 
 ---
 
